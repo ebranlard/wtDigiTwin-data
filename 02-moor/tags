@@ -1,0 +1,77 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+B_lin	.\py\B000010_moorM.py	/^def B_lin(q=None,qd=None,p=None,u=None):$/;"	f	access:public
+B_lin	.\py\B100000_moorM.py	/^def B_lin(q=None,qd=None,p=None,u=None):$/;"	f	access:public
+B_lin	.\py\B100010_moorM.py	/^def B_lin(q=None,qd=None,p=None,u=None):$/;"	f	access:public
+CG_on_z	.\StructMoorSim.py	/^CG_on_z =False # <<< Very important for most models with RNA$/;"	v
+C_lin	.\py\B000010_moorM.py	/^def C_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+C_lin	.\py\B100000_moorM.py	/^def C_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+C_lin	.\py\B100010_moorM.py	/^def C_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+K	.\MAPLinearize.py	/^K = moor.linear(epsilon)    $/;"	v
+K_Moor	.\StructMoorSim.py	/^K_Moor = np.array($/;"	v
+K_lin	.\py\B000010_moorM.py	/^def K_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+K_lin	.\py\B100000_moorM.py	/^def K_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+K_lin	.\py\B100010_moorM.py	/^def K_lin(q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+M_lin	.\py\B000010_moorM.py	/^def M_lin(q=None,p=None,z=None):$/;"	f	access:public
+M_lin	.\py\B100000_moorM.py	/^def M_lin(q=None,p=None,z=None):$/;"	f	access:public
+M_lin	.\py\B100010_moorM.py	/^def M_lin(q=None,p=None,z=None):$/;"	f	access:public
+Map	.\MAPLinearize.py	/^from welib.moor.mappp import Map$/;"	i
+WT	.\StructMoorSim.py	/^WT = FASTWindTurbine(fstFilename, twrShapes=[0,2], nSpanTwr=50)  # TODO$/;"	v
+WtrDens	.\MAPLinearize.py	/^WtrDens=1025$/;"	v
+WtrDepth	.\MAPLinearize.py	/^WtrDepth=220$/;"	v
+cos	.\py\B000010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+cos	.\py\B100000_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+cos	.\py\B100010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+create	.\StructMoorSim.py	/^create=True$/;"	v
+epsilon	.\MAPLinearize.py	/^epsilon = 1e-3 # finite difference epsilon$/;"	v
+fig	.\StructMoorSim.py	/^fig = sim.plot(export=figExport, figSize=figSize, title=figTitle)$/;"	v
+figExport	.\StructMoorSim.py	/^figExport=True$/;"	v
+figSize	.\StructMoorSim.py	/^figSize =(10,4.2)$/;"	v
+figTitle	.\StructMoorSim.py	/^figTitle='StructMoorSim - ' + os.path.dirname(fstFilename)+' ' + modelName$/;"	v
+forcing	.\py\B000010_moorM.py	/^def forcing(t,q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+forcing	.\py\B100000_moorM.py	/^def forcing(t,q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+forcing	.\py\B100010_moorM.py	/^def forcing(t,q=None,qd=None,p=None,u=None,z=None):$/;"	f	access:public
+generateModel	.\StructMoorSim.py	/^from welib.yams.models.generator import generateModel$/;"	i
+generateOneRigidBodyModel	.\StructMoorSim.py	/^from welib.yams.models.generator_oneRigidBody import generateOneRigidBodyModel$/;"	i
+gravity	.\MAPLinearize.py	/^gravity=9.80665$/;"	v
+info	.\py\B000010_moorM.py	/^def info():$/;"	f	access:public
+info	.\py\B100000_moorM.py	/^def info():$/;"	f	access:public
+info	.\py\B100010_moorM.py	/^def info():$/;"	f	access:public
+inv	.\StructMoorSim.py	/^from numpy.linalg import inv$/;"	i
+main	.\StructMoorSim.py	/^def main():$/;"	f	access:public
+mass_matrix	.\py\B000010_moorM.py	/^def mass_matrix(q=None,p=None,z=None):$/;"	f	access:public
+mass_matrix	.\py\B100000_moorM.py	/^def mass_matrix(q=None,p=None,z=None):$/;"	f	access:public
+mass_matrix	.\py\B100010_moorM.py	/^def mass_matrix(q=None,p=None,z=None):$/;"	f	access:public
+matplotlib	.\MAPLinearize.py	/^import matplotlib.pyplot as plt$/;"	i
+matplotlib	.\StructMoorSim.py	/^import matplotlib.pyplot as plt$/;"	i
+moor	.\MAPLinearize.py	/^moor = Map('..\/TetraSparModel\/MAP.dat', WtrDepth=WtrDepth, gravity=gravity, WtrDens=WtrDens)$/;"	v
+np	.\MAPLinearize.py	/^import numpy as np$/;"	i
+np	.\py\B000010_moorM.py	/^import numpy as np$/;"	i
+np	.\py\B100000_moorM.py	/^import numpy as np$/;"	i
+np	.\py\B100010_moorM.py	/^import numpy as np$/;"	i
+os	.\StructMoorSim.py	/^import os$/;"	i
+p	.\StructMoorSim.py	/^p=sim.p$/;"	v
+pi	.\py\B000010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+pi	.\py\B100000_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+pi	.\py\B100010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+plt	.\MAPLinearize.py	/^import matplotlib.pyplot as plt$/;"	i
+plt	.\StructMoorSim.py	/^import matplotlib.pyplot as plt$/;"	i
+qop	.\StructMoorSim.py	/^qop=None # <<<< VERY IMPORTANT FOR LIN MODEL$/;"	v
+sim	.\StructMoorSim.py	/^sim=SimulatorFromOF(WT, modelName=modelName, packageDir='py')$/;"	v
+sin	.\py\B000010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+sin	.\py\B100000_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+sin	.\py\B100010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+sqrt	.\py\B000010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+sqrt	.\py\B100000_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+sqrt	.\py\B100010_moorM.py	/^from numpy import cos, sin, pi, sqrt$/;"	i
+tMax	.\StructMoorSim.py	/^tMax = 10$/;"	v
+tMax	.\StructMoorSim.py	/^tMax = None$/;"	v
+z_B0	.\StructMoorSim.py	/^z_B0=-16$/;"	v
+z_BM	.\StructMoorSim.py	/^z_BM=(z_B0+z_BM)$/;"	v
+z_BM	.\StructMoorSim.py	/^z_BM=-13.97$/;"	v
+z_BM	.\StructMoorSim.py	/^z_BM=0$/;"	v
+z_BM	.\StructMoorSim.py	/^z_BM=z_B0$/;"	v

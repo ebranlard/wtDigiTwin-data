@@ -2,7 +2,7 @@ import unittest
 import os
 import numpy as np    
 import matplotlib.pyplot as plt
-
+import welib
 from welib.yams.models.simulator import *
 from welib.yams.models.generator_oneRigidBody import generateOneRigidBodyModel
 from welib.yams.models.generator import generateModel
@@ -10,6 +10,8 @@ from welib.tools.stats import mean_rel_err
 np.set_printoptions(linewidth=300, precision=5)
 
 MyDir=os.path.dirname(__file__)
+packageDir  = os.path.join(MyDir,'py')
+
 import platform
 create=True
 if platform.node()=='ebranlar-36947s':
@@ -18,13 +20,12 @@ if platform.node()=='ebranlar-36947s':
 
 def YAMSsim(fstFilename, modelName, CG_on_z=False, qop=None, qdop=None, tMax=None, create=True):
     fstFilename = os.path.join(MyDir,fstFilename)
-    packageDir  = os.path.join(MyDir,'py')
 
     if create:
         if modelName[0]=='B':
-            generateOneRigidBodyModel(modelName, CG_on_z=CG_on_z)
+            generateOneRigidBodyModel(modelName, CG_on_z=CG_on_z, packageDir=packageDir)
         else:
-            generateModel(modelName, aero_forces=False, moor_loads=False, hydro_loads=False)
+            generateModel(modelName, aero_forces=False, moor_loads=False, hydro_loads=False, packageDir=packageDir)
 
     WT = FASTWindTurbine(fstFilename, twrShapes=[0,2], nSpanTwr=50)  # TODO
 
@@ -51,11 +52,8 @@ class Test(unittest.TestCase):
         fstFilename = 'Spar_F5T1N0S1/Main_Spar_ED.fst'; modelName='F5T1N0S1_fnd'; 
         qop=[0,0,0,0,0,0,0]; qdop=[0,0,0,0,0,0,10/60*2*np.pi];
         sim = YAMSsim(fstFilename, modelName, qop=qop, qdop=qdop, create=create, tMax=10)
-
-        dfNL=sim.dfNL
-        dfLI=sim.dfLI
-        dfFS=sim.dfFS
-
+        dfNL=sim.dfNL; dfLI=sim.dfLI; dfFS=sim.dfFS
+        #sim.plot()
         # NL
         k='PtfmSurge_[m]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 5.0);
         k='PtfmSway_[m]';    eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 3.0);
@@ -64,6 +62,7 @@ class Test(unittest.TestCase):
         k='PtfmYaw_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 2.0);
         k='Azimuth_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
         k='RotSpeed_[rpm]';  eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
+        k='Q_TFA1_[m]';      eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 4.0);
         # Lin
         k='PtfmSurge_[m]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 3.0);
         k='PtfmSway_[m]';    eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 5.0);
@@ -72,20 +71,15 @@ class Test(unittest.TestCase):
         k='PtfmYaw_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
         k='Azimuth_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
         k='RotSpeed_[rpm]';  eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
-
-        sim.plot(export=False)
-        plt.show()
+        k='Q_TFA1_[m]';      eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
 
     def test_F5T1RNA(self):
 
         fstFilename = 'Spar_F5T1RNA/Main_Spar_ED.fst'; modelName='F5T1RNA_fnd'; 
         qop=[0,0,0,0,0,0]; qdop=[0,0,0,0,0,0];
         sim = YAMSsim(fstFilename, modelName, qop=qop, qdop=qdop, create=create, tMax=10)
-
-        dfNL=sim.dfNL
-        dfLI=sim.dfLI
-        dfFS=sim.dfFS
-
+        dfNL=sim.dfNL; dfLI=sim.dfLI; dfFS=sim.dfFS
+        #sim.plot()
         # NL
         k='PtfmSurge_[m]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 5.0);
         k='PtfmSway_[m]';    eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
@@ -99,10 +93,9 @@ class Test(unittest.TestCase):
         k='PtfmPitch_[deg]'; eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 5.0);
         k='PtfmYaw_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
 
-        sim.plot(export=False)
-        plt.show()
-
 
 if __name__ == '__main__':
-    Test().test_F5T1RNA()
+    #Test().test_F5T1RNA()
+    Test().test_F5T1N0S1()
     #unittest.main()
+    plt.show()
