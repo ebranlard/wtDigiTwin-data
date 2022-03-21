@@ -8,6 +8,7 @@
 *.sum.yaml
 *__pycache__*
 _*
+!__init__.py
 *.json
 
 *.out
