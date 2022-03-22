@@ -87,11 +87,8 @@ figTitle='StructMoorSim - ' + os.path.dirname(fstFilename)+' ' + modelName
 P_HDRef = np.array((0,0,0))
 P_EDRef = np.array((0,0,Refz))
 
-T_HD2ED= rigidTransformationTwoPoints(P_HDRef, P_EDRef)
-T_ED2HD= rigidTransformationTwoPoints(P_EDRef, P_HDRef)
-
+T_ED2HD  = rigidTransformationTwoPoints(P_EDRef, P_HDRef)
 T_HD2ED_l= rigidTransformationTwoPoints_Loads(P_HDRef, P_EDRef)
-T_ED2HD_l= rigidTransformationTwoPoints_Loads(P_EDRef, P_HDRef)
 
 
 # --- MAP linearization
@@ -111,7 +108,11 @@ print(K_Moor)
 
 K_Moor_ED1 = T_HD2ED_l.dot(K_Moor)
 K_Moor_ED2 = T_HD2ED_l.dot(K_Moor.dot(T_ED2HD))
+print('>>>T \n',T_ED2HD)
+print('>>>TT\n',T_HD2ED_l)
+print('>>>TT\n',T_HD2ED_l.T)
 
+raise Exception()
 
 print("Mooring stiffness matrix (0,0,Refz)")
 print(K_Moor_ED1)
