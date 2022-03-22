@@ -33,9 +33,11 @@ runSim=True
 tMax = 10
 tMax = None
 
-modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_F101010/Main.fst'; hydro=True
-modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_F001000/Main.fst'; hydro=True
-modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010/Main.fst'; hydro=True 
+
+# modelName = 'B111110_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
+modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
+# modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; hydro=True
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True 
 # modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010_NoHydro/Main.fst'; hydro=True
 
 # modelName = 'B101010_hydro0'; fstFilename = 'MD0HD1SD0_F101010/Main.fst'; hydro=True
@@ -48,8 +50,10 @@ modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010/Main.fst'; hydro=
 
 # --- Generate python package
 if create:
-    #generateOneRigidBodyModel(modelName)
-    generateModel(modelName)
+    if modelName[0]=='B':
+        generateOneRigidBodyModel(modelName)
+    else:
+        generateModel(modelName, aero_forces=False, moor_loads=False, hydro_loads=True)
 
 # --- Run non linear and linear simulation using a FAST model as input
 if runSim:
@@ -97,8 +101,8 @@ if runSim:
     # qdop = np.array([np.mean(dfFS[c]) for c in WT.qd_channels])*0
     # --- Simulation
     #sim.setInputs(u, du, uop, qop, qdop)
-    sim.simulate()
-    sim.plot()
+    sim.simulate(out=True, prefix='_hydroPyPrescrLoads')
+    sim.plot(export=True, prefix='_hydroPyPrescrLoads')
 
     # --- Plot forcing
     #fig,axes = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)

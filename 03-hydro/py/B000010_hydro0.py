@@ -18,7 +18,7 @@ def forcing(t,q=None,qd=None,p=None,u=None,z=None):
     """ Non linear mass forcing 
     q:  degrees of freedom, array-like: ['phi_y(t)']
     qd: dof velocities, array-like
-    p:  parameters, dictionary with keys: ['M_B', 'g', 'z_B0', 'z_BG']
+    p:  parameters, dictionary with keys: ['M_B', 'g', 'x_BG', 'z_B0', 'z_BG']
     u:  inputs, dictionary with keys: ['F_hx', 'F_hz', 'M_hy']
            where each values is a function of time
     """
@@ -26,7 +26,7 @@ def forcing(t,q=None,qd=None,p=None,u=None,z=None):
         q  = z[0:int(len(z)/2)] 
         qd = z[int(len(z)/2): ] 
     FF = np.zeros((1,1))
-    FF[0,0] = p['M_B']*p['g']*p['z_BG']*sin(q[0])+p['z_B0']*u['F_hx'](t,q,qd)*cos(q[0])-p['z_B0']*u['F_hz'](t,q,qd)*sin(q[0])+u['M_hy'](t,q,qd)
+    FF[0,0] = p['M_B']*p['g']*p['x_BG']*cos(q[0])+p['M_B']*p['g']*p['z_BG']*sin(q[0])+p['z_B0']*u['F_hx'](t,q,qd)*cos(q[0])-p['z_B0']*u['F_hz'](t,q,qd)*sin(q[0])+u['M_hy'](t,q,qd)
     return FF
 
 def mass_matrix(q=None,p=None,z=None):
@@ -70,7 +70,7 @@ def K_lin(q=None,qd=None,p=None,u=None,z=None):
     """ Linear stiffness matrix 
     q:  degrees of freedom, array-like: ['phi_y(t)']
     qd: dof velocities, array-like
-    p:  parameters, dictionary with keys: ['M_B', 'g', 'z_B0', 'z_BG']
+    p:  parameters, dictionary with keys: ['M_B', 'g', 'x_BG', 'z_B0', 'z_BG']
     u:  inputs at operating point, dictionary with keys: ['F_hx', 'F_hz']
            where each values is a constant!
     """
@@ -78,7 +78,7 @@ def K_lin(q=None,qd=None,p=None,u=None,z=None):
         q  = z[0:int(len(z)/2)] 
         qd = z[int(len(z)/2): ] 
     KK = np.zeros((1,1))
-    KK[0,0] = -p['M_B']*p['g']*p['z_BG']*cos(q[0])-p['z_B0']*(-u['F_hx']*sin(q[0])-u['F_hz']*cos(q[0]))
+    KK[0,0] = p['M_B']*p['g']*p['x_BG']*sin(q[0])-p['M_B']*p['g']*p['z_BG']*cos(q[0])-p['z_B0']*(-u['F_hx']*sin(q[0])-u['F_hz']*cos(q[0]))
     return KK
 
 def B_lin(q=None,qd=None,p=None,u=None):

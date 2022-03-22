@@ -53,12 +53,3 @@ if __name__ == '__main__':
 
     plt.show()
 
-# if __name__ == '__test__':
-#     fstFilename = os.path.join(MyDir, '../../../data/Spar/Main_Spar_ED_HydroExample.fst');
-#     dfPH, dfOF = hydroSim(fstFilename, tMax=0.1, plot=False, json=False)
-#     np.testing.assert_almost_equal(dfPH['HydroFxi_[N]'].values  /1e6,dfOF['HydroFxi_[N]'].values  /1e6, 5)
-#     np.testing.assert_almost_equal(dfPH['HydroFyi_[N]'].values  /1e6,dfOF['HydroFyi_[N]'].values  /1e6, 5)
-#     np.testing.assert_almost_equal(dfPH['HydroFzi_[N]'].values  /1e6,dfOF['HydroFzi_[N]'].values  /1e6, 5)
-#     np.testing.assert_almost_equal(dfPH['HydroMxi_[N-m]'].values/1e6,dfOF['HydroMxi_[N-m]'].values/1e6, 3)
-#     np.testing.assert_almost_equal(dfPH['HydroMyi_[N-m]'].values/1e6,dfOF['HydroMyi_[N-m]'].values/1e6, 3)
-#     np.testing.assert_almost_equal(dfPH['HydroMzi_[N-m]'].values/1e6,dfOF['HydroMzi_[N-m]'].values/1e6, 3)
