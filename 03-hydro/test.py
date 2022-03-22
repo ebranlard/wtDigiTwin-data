@@ -26,7 +26,7 @@ class TestHydro(unittest.TestCase):
 
     def test_PrescribeMotion_SparF101010(self):
 
-        fstFilename = os.path.join(MyDir, 'SparNoRNA_F101010/Main.fst')
+        fstFilename = os.path.join(MyDir, 'SparNoRNA_MD0HD1SD0_F101010/Main.fst')
 
         tMax=10
         #tMax=None
