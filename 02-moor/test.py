@@ -111,7 +111,7 @@ class Test(unittest.TestCase):
         qop=[0,0.00,0,-0.0*np.pi/180, 0.0*np.pi/180,0,0]; aero_forces=False;  qdop=[0,0,0,0,0,0,10/60*2*np.pi];
         Refz=20
 
-        create=True
+        create=False
         if platform.node()=='ebranlar-36947s':
             create=False
 
@@ -127,23 +127,23 @@ class Test(unittest.TestCase):
         dfNL=sim.dfNL; dfLI=sim.dfLI; dfFS=sim.dfFS
         sim.plot()
         # NL
-        k='PtfmSurge_[m]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 2.0);
-        k='PtfmSway_[m]';    eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 2.0);
-        k='PtfmRoll_[deg]';  eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
-        k='PtfmPitch_[deg]'; eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 2.0);
-        k='PtfmYaw_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 20.0);
-        k='Azimuth_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
-        k='RotSpeed_[rpm]';  eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 1.0);
-        k='Q_TFA1_[m]';      eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 7.0);
+        k='PtfmSurge_[m]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 4.0);
+        k='PtfmSway_[m]';    eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 4.0);
+        k='PtfmRoll_[deg]';  eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 3.0);
+        k='PtfmPitch_[deg]'; eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 4.0);
+        k='PtfmYaw_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 22.0);
+        k='Azimuth_[deg]';   eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 3.0);
+        k='RotSpeed_[rpm]';  eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 3.0);
+        k='Q_TFA1_[m]';      eps=comp(dfNL, dfFS, k); self.assertLessEqual(eps, 9.0);
         # Lin
-        k='PtfmSurge_[m]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 3.0);
-        k='PtfmSway_[m]';    eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 2.0);
-        k='PtfmRoll_[deg]';  eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
-        k='PtfmPitch_[deg]'; eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 3.0);
-        k='PtfmYaw_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 11.0);
-        k='Azimuth_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
-        k='RotSpeed_[rpm]';  eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 1.0);
-        k='Q_TFA1_[m]';      eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 12.0);
+        k='PtfmSurge_[m]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 4.0);
+        k='PtfmSway_[m]';    eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 3.0);
+        k='PtfmRoll_[deg]';  eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 2.0);
+        k='PtfmPitch_[deg]'; eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 4.0);
+        k='PtfmYaw_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 12.0);
+        k='Azimuth_[deg]';   eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 2.0);
+        k='RotSpeed_[rpm]';  eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 2.0);
+        k='Q_TFA1_[m]';      eps=comp(dfNL, dfLI, k); self.assertLessEqual(eps, 13.0);
 
 if __name__ == '__main__':
     Test().test_B000010_moorO()
