@@ -1,18 +1,4 @@
 """ 
- 
-
- F000010
-	 NOTE: to get the best results, it's best to set the uop of F_hx and M_hy to zero
-	       because these variables tend to overshoot at t=0, and the mean is not a representative
-	       operating point value
-	OR: to have a sufficiently long time series/perturbation about a mean
-
-  F001000
-		For improved results set the "OP" of Fz to M g  (since mean might have some offset)
-		
-		NOTE:  
-		  The heave equation might need to be replaced by a simple restoring heave/spring motion
-		  Otherwise, things might end up unstable
 """
 import os
 import numpy as np    
@@ -27,18 +13,18 @@ from welib.yams.models.generator import generateModel
 
 # ---- Script parameters
 create=False
-create=True
+# create=True
 runSim=True
 
 tMax = 10
 tMax = None
 
-modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst'; hydro=True
+# modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst'; hydro=True
 
 # modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst'; hydro=True
 
 
-# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
+modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
 # modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; hydro=True
 # modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True 
 # modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010_NoHydro/Main.fst'; hydro=True
@@ -69,10 +55,7 @@ if runSim:
     else:
         time, dfFS, p = sim.setupSim(tMax=tMax, J_at_Origin=True)
 
-    if not hydro:
-        pass # default to 0
-    else:
-        sim.setPrescribedHydroInputs()
+    sim.setCoupledHydroLoads()
     #uop=None
     #du=None
     qop  = None
@@ -82,8 +65,8 @@ if runSim:
     # qdop = np.array([np.mean(dfFS[c]) for c in WT.qd_channels])*0
     # --- Simulation
     #sim.setInputs(u, du, uop, qop, qdop)
-    sim.simulate(out=True, prefix='_hydroPyPrescrLoads')
-    sim.plot(export=True, prefix='_hydroPyPrescrLoads')
+    sim.simulate(out=True, prefix='_hydroPyCoupled')
+    sim.plot(export=True, prefix='_hydroPyCoupled')
 
     # --- Plot forcing
     #fig,axes = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
