@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # Local 
 import weio
-from welib.FEM.utils import rigidTransformationTwoPoints, rigidTransformationTwoPoints_Loads
+from welib.FEM.utils import rigidTransformationTwoPoints, rigidTransformationTwoPoints_Loads, transferRigidLoads
 from welib.yams.kinematics import rigidBodyMotion2Points_q6
 
 Refz=16
@@ -31,7 +31,7 @@ lCols = ['HydroFxi_[N]','HydroFyi_[N]','HydroFzi_[N]','HydroMxi_[N-m]','HydroMyi
 
 
 # --- Read OpenFAST
-fstFilename = 'MD0HD1SD0_PitchDecayRigid_Heave/Main.fst'
+fstFilename = 'TS_MD0HD1SD0_F111111/Main.fst'
 dfOF = weio.read(fstFilename.replace('.fst','.out')).toDataFrame()
 time=dfOF['Time_[s]'].values
 
@@ -43,9 +43,12 @@ T_ED2HD= rigidTransformationTwoPoints(P_EDRef, P_HDRef)
 T_HD2ED_l= rigidTransformationTwoPoints_Loads(P_HDRef, P_EDRef)
 T_ED2HD_l= rigidTransformationTwoPoints_Loads(P_EDRef, P_HDRef)
 
+print('>>> T\n', T_HD2ED_l)
+
 # --- Convert motion from Ref to Ptfm
 fh_HD = np.zeros((len(time), 6))
 fh_ED = np.zeros((len(time), 6))
+fh_ED2= np.zeros((len(time), 6))
 fh_HD2 = np.zeros((len(time), 6))
 qRef        = np.zeros((len(time),6))
 qdRef       = np.zeros((len(time),6))
@@ -79,66 +82,71 @@ for it, t in enumerate(time):
 
     # --- Loads
     fh_HD [it,:] = dfOF[lCols].iloc[it].values
+    fh_HD [it,0] *= 100
 
     fh_ED [it,:] = T_HD2ED_l.dot(fh_HD[it,:])
     fh_HD2[it,:] = T_ED2HD_l.dot(fh_ED[it,:])
+
     #fh[it,:] = -M.dot(qdd) - C.dot(qd) - K.dot(q)
     #fh[it,:] = -M.dot(qdd) - C.dot(qd) - K.dot(q)
 
+fh_ED2[:,:] = transferRigidLoads(fh_HD[:,:].T, P_HDRef, P_EDRef).T
 
 # lCols = ['HydroFxi_[N]','HydroFyi_[N]','HydroFzi_[N]','HydroMxi_[N-m]','HydroMyi_[N-m]','HydroMzi_[N-m]']
 # dfPH = pd.DataFrame(data=np.column_stack((time,fh)), columns=['Time_[s]']+lCols)
 
 # --- Plot Loads
-fig,ax = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
+fig,axes = plt.subplots(6, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
 fig.subplots_adjust(left=0.12, right=0.95, top=0.95, bottom=0.11, hspace=0.20, wspace=0.20)
-ax.plot(time, fh_HD[:,5] , '-', label='HD')
-ax.plot(time, fh_ED[:,5] , '--', label='ED')
-ax.plot(time, fh_HD2[:,5], ':', label='HD2')
+for i,ax in enumerate(axes):
+    ax.plot(time, fh_HD[:,i] , '-', label='HD')
+    ax.plot(time, fh_ED[:,i] , '--', label='ED')
+    ax.plot(time, fh_HD2[:,i], ':', label='HD2')
+    ax.plot(time, fh_ED2[:,i], '-.', label='ED2')
 ax.set_xlabel('')
 ax.set_ylabel('')
 ax.legend()
 
 
-# --- Plot
-fig,axes = plt.subplots(6, 3, sharey=False, figsize=(12.8,8.5)) # (6.4,4.8)
-fig.subplots_adjust(left=0.11, right=0.95, top=0.95, bottom=0.07, hspace=0.40, wspace=0.22)
-# DOF
-for iCol, (col1,col2) in enumerate(zip(qCol1, qCol2)):
-    # Positions
-    axes[iCol,0].plot(time, qPtfm_lin[:,iCol]  , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
-    axes[iCol,0].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
-    axes[iCol,0].plot(time, dfOF[col2].values  , '--', label='Ptfm')
-    axes[iCol,0].plot(time, qPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
-    axes[iCol,0].plot(time, qRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
-    axes[iCol,0].set_ylabel(col1.replace('_',' '))
-for iCol, (col1,col2) in enumerate(zip(qdCol1, qdCol2)):
-    # Velocities
-    axes[iCol,1].plot(time, qdPtfm_lin[:,iCol] , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
-    axes[iCol,1].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
-    axes[iCol,1].plot(time, dfOF[col2].values  , '--', label='Ptfm')
-    axes[iCol,1].plot(time, qdPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
-    axes[iCol,1].plot(time, qdRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
-    axes[iCol,1].set_ylabel(col1.replace('_',' '))
-
-for iCol, (col1,col2) in enumerate(zip(qddCol1, qddCol2)):
-    # Acceleration
-    axes[iCol,2].plot(time, qddPtfm_lin[:,iCol]  , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
-    axes[iCol,2].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
-    axes[iCol,2].plot(time, dfOF[col2].values  , '--', label='Ptfm')
-    axes[iCol,2].plot(time, qddPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
-    axes[iCol,2].plot(time, qddRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
-    axes[iCol,2].set_ylabel(col1.replace('_',' '))
-
-
-# # Forces
-# for iCol, col in enumerate(lCols):
-#     axes[iCol,1].plot(time, dfPH[col].values+F0[iCol]  , label='Python linear')
-#     axes[iCol,1].plot(time, dfOF[col].values           , 'k:', label='OpenFAST')
-#     axes[iCol,1].set_ylabel(col.replace('_',' '))
-axes[0,0].legend()
-axes[5,0].set_xlabel('Time [s]')
-axes[5,1].set_xlabel('Time [s]')
+# --- Plot Motion
+# fig,axes = plt.subplots(6, 3, sharey=False, figsize=(12.8,8.5)) # (6.4,4.8)
+# fig.subplots_adjust(left=0.11, right=0.95, top=0.95, bottom=0.07, hspace=0.40, wspace=0.22)
+# # DOF
+# for iCol, (col1,col2) in enumerate(zip(qCol1, qCol2)):
+#     # Positions
+#     axes[iCol,0].plot(time, qPtfm_lin[:,iCol]  , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
+#     axes[iCol,0].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
+#     axes[iCol,0].plot(time, dfOF[col2].values  , '--', label='Ptfm')
+#     axes[iCol,0].plot(time, qPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
+#     axes[iCol,0].plot(time, qRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
+#     axes[iCol,0].set_ylabel(col1.replace('_',' '))
+# for iCol, (col1,col2) in enumerate(zip(qdCol1, qdCol2)):
+#     # Velocities
+#     axes[iCol,1].plot(time, qdPtfm_lin[:,iCol] , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
+#     axes[iCol,1].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
+#     axes[iCol,1].plot(time, dfOF[col2].values  , '--', label='Ptfm')
+#     axes[iCol,1].plot(time, qdPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
+#     axes[iCol,1].plot(time, qdRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
+#     axes[iCol,1].set_ylabel(col1.replace('_',' '))
+# 
+# for iCol, (col1,col2) in enumerate(zip(qddCol1, qddCol2)):
+#     # Acceleration
+#     axes[iCol,2].plot(time, qddPtfm_lin[:,iCol]  , '-',   label='Ptfm (lin)', lw=3, alpha=0.4)
+#     axes[iCol,2].plot(time, dfOF[col1].values  , '-', label='Hydro Ref')
+#     axes[iCol,2].plot(time, dfOF[col2].values  , '--', label='Ptfm')
+#     axes[iCol,2].plot(time, qddPtfm[:,iCol]      , ':',   label='Ptfm (Transfered)')
+#     axes[iCol,2].plot(time, qddRef [:,iCol]      , '-.',  label='Hydro ref (Transfered)')
+#     axes[iCol,2].set_ylabel(col1.replace('_',' '))
+# 
+# 
+# # # Forces
+# # for iCol, col in enumerate(lCols):
+# #     axes[iCol,1].plot(time, dfPH[col].values+F0[iCol]  , label='Python linear')
+# #     axes[iCol,1].plot(time, dfOF[col].values           , 'k:', label='OpenFAST')
+# #     axes[iCol,1].set_ylabel(col.replace('_',' '))
+# axes[0,0].legend()
+# axes[5,0].set_xlabel('Time [s]')
+# axes[5,1].set_xlabel('Time [s]')
 
 plt.show()
 

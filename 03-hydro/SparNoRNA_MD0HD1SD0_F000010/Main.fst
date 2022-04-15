@@ -30,15 +30,15 @@ False         Echo            - Echo input data to <RootName>.ech (flag)
 0                      WtrDpth       - Water depth (m)
 0                      MSL2SWL       - Offset between still-water level and mean sea level (m) [positive upward]
 ---------------------- INPUT FILES ---------------------------------------------
-"SparNoRNA_ED_Platform_RefH.dat"      EDFile          - Name of file containing ElastoDyn input parameters (quoted string)
+"ED.dat"      EDFile          - Name of file containing ElastoDyn input parameters (quoted string)
 "unused"                                                 BDBldFile(1)    - Name of file containing BeamDyn input parameters for blade 1 (quoted string)
 "unused"                                                 BDBldFile(2)    - Name of file containing BeamDyn input parameters for blade 2 (quoted string)
 "unused"                                                 BDBldFile(3)    - Name of file containing BeamDyn input parameters for blade 3 (quoted string)
 "unused"                                                 InflowFile      - Name of file containing inflow wind input parameters (quoted string)
 "unused"                                                 AeroFile        - Name of file containing aerodynamic input parameters (quoted string)
 "unused"                                                 ServoFile       - Name of file containing control and electrical-drive input parameters (quoted string)
-"SparNoRNA_HD_RefH.dat"                                  HydroFile       - Name of file containing hydrodynamic input parameters (quoted string)
-"SparNoRNA_SD_RefH.dat"                                  SubFile         - Name of file containing sub-structural input parameters (quoted string)
+"HD.dat"      HydroFile       - Name of file containing hydrodynamic input parameters (quoted string)
+"unused"      SubFile         - Name of file containing sub-structural input parameters (quoted string)
 "unused"                                                 MooringFile     - Name of file containing mooring system input parameters (quoted string)
 "unused"                                                 IceFile         - Name of file containing ice input parameters (quoted string)
 ---------------------- OUTPUT --------------------------------------------------

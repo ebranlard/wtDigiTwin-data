@@ -69,9 +69,9 @@ class TestHydro(unittest.TestCase):
         MCKF0 = hd.linearize_RigidMotion2Loads(q0=q0)
         # --- Time integration (TODO, use simulator?)
         print('Time integration linear hydrodynamics ')
-        dfLI, _    =    hydroSimLinFromOpenFAST(fstFilename, tMax=tMax, MCK=MCKF0[:3], q0=q0, F0=MCKF0[-1])
+        dfLI, _, _    =    hydroSimLinFromOpenFAST(fstFilename, tMax=tMax, MCKF=MCKF0, q0=q0)
         print('Time integration nonlinear hydrodynamics ')
-        dfNL, dfOF, msy = hydroSimFromOpenFAST(fstFilename, tMax=tMax, verbose=False)
+        dfNL, dfOF, msy, _ = hydroSimFromOpenFAST(fstFilename, tMax=tMax, verbose=False)
         # NL
         k='HydroFxi_[N]';   eps=comp(dfNL, dfOF, k); self.assertLessEqual(eps, 6.0);
         k='HydroFzi_[N]';   eps=comp(dfNL, dfOF, k); self.assertLessEqual(eps, 1.0);
@@ -97,9 +97,9 @@ class TestHydro(unittest.TestCase):
         MCKF0 = hd.linearize_RigidMotion2Loads(q0=q0)
         # --- Time integration (TODO, use simulator?)
         print('Time integration linear hydrodynamics ')
-        dfLI, _    =    hydroSimLinFromOpenFAST(fstFilename, tMax=tMax, MCK=MCKF0[:3], q0=q0, F0=MCKF0[-1])
+        dfLI, _ ,_    =    hydroSimLinFromOpenFAST(fstFilename, tMax=tMax, MCKF=MCKF0, q0=q0)
         print('Time integration nonlinear hydrodynamics ')
-        dfNL, dfOF, msy = hydroSimFromOpenFAST(fstFilename, tMax=tMax, verbose=False)
+        dfNL, dfOF, msy, _ = hydroSimFromOpenFAST(fstFilename, tMax=tMax, verbose=False)
         # NL
         k='HydroFxi_[N]';   eps=comp(dfNL, dfOF, k); self.assertLessEqual(eps, 1.0);
         k='HydroFyi_[N]';   eps=comp(dfNL, dfOF, k); self.assertLessEqual(eps, 1.0);

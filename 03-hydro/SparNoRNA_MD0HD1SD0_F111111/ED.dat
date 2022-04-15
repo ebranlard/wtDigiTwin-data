@@ -149,5 +149,11 @@ True          TabDelim    - Use tab delimiters in text tabular output file? (fla
 "QD_R"		Velocity of platform roll tilt rotation DOF
 "QD_P"		Velocity of platform pitch tilt rotation DOF
 "QD_Y"		Velocity of platform yaw rotation DOF
+"QD2_Sg"    Acceleration of platform horizontal surge translation DOF
+"QD2_Sw"	Acceleration of platform horizontal sway translation DOF
+"QD2_Hv"	Acceleration of platform vertical heave translation DOF
+"QD2_R"		Acceleration of platform roll tilt rotation DOF
+"QD2_P"		Acceleration of platform pitch tilt rotation DOF
+"QD2_Y"		Acceleration of platform yaw rotation DOF
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ---------------------------------------------------------------------------------------
