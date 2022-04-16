@@ -26,8 +26,8 @@ from welib.moor.mappp import Map
 
 figExport=True
 create=True
-# create=False
-tMax = 10
+create=False
+tMax = 1
 tMax = None
 
 
@@ -112,7 +112,7 @@ print('>>>T \n',T_ED2HD)
 print('>>>TT\n',T_HD2ED_l)
 print('>>>TT\n',T_HD2ED_l.T)
 
-raise Exception()
+# raise Exception()
 
 print("Mooring stiffness matrix (0,0,Refz)")
 print(K_Moor_ED1)
@@ -156,6 +156,8 @@ sim.p['z_T0'] = -Refz
 sim.simulate(out=True, prefix='')
 fig = sim.plot(export=figExport, figSize=figSize, title=figTitle)
 p=sim.p
+
+sim.save()
 
 
 

@@ -1,17 +1,17 @@
 """
 Equations of motion
-model name: B000010
+model name: B000010_hydroO
 """
 import numpy as np
 from numpy import cos, sin, pi, sqrt
 def info():
     """ Return information about current model present in this package """
     I=dict()
-    I['name']='B000010'
+    I['name']='B000010_hydroO'
     I['nq']=1
-    I['nu']=0
+    I['nu']=1
     I['sq']=['phi_y']
-    I['su']=[]
+    I['su']=['M_hy']
     return I
 
 def forcing(t,q=None,qd=None,p=None,u=None,z=None):
@@ -19,14 +19,14 @@ def forcing(t,q=None,qd=None,p=None,u=None,z=None):
     q:  degrees of freedom, array-like: ['phi_y(t)']
     qd: dof velocities, array-like
     p:  parameters, dictionary with keys: ['M_B', 'g', 'x_BG', 'z_BG']
-    u:  inputs, dictionary with keys: []
+    u:  inputs, dictionary with keys: ['M_hy']
            where each values is a function of time
     """
     if z is not None:
         q  = z[0:int(len(z)/2)] 
         qd = z[int(len(z)/2): ] 
     FF = np.zeros((1,1))
-    FF[0,0] = p['M_B']*p['g']*p['x_BG']*cos(q[0])+p['M_B']*p['g']*p['z_BG']*sin(q[0])
+    FF[0,0] = p['M_B']*p['g']*p['x_BG']*cos(q[0])+p['M_B']*p['g']*p['z_BG']*sin(q[0])+u['M_hy'](t,q,qd)
     return FF
 
 def mass_matrix(q=None,p=None,z=None):
@@ -88,8 +88,9 @@ def B_lin(q=None,qd=None,p=None,u=None):
     p:  parameters, dictionary with keys: []
     u:  inputs at operating point, dictionary with keys: []
            where each values is a constant!
-    The columns of B correspond to:   []\\ 
+    The columns of B correspond to:   [M_hy(t)]\\ 
     """
-    BB = np.zeros((0,0))
+    BB = np.zeros((1,1))
+    BB[0,0] = 1
     return BB
 

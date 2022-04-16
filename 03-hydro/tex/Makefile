@@ -31,11 +31,10 @@ else
    SLASH="/"
 endif
 
-all: figspdf pdf
+all: pdf
 
-pdf: figspdf
+pdf: 
 	pdflatex -synctex=1 --file-line-error-style --shell-escape --interaction=nonstopmode $(MAIN)
-	bibtex $(MAIN).aux
 
 bibtex:
 	bibtex $(MAIN).aux

@@ -11,7 +11,7 @@ np.set_printoptions(linewidth=300, precision=5)
 figExport=True
 # figExport=False
 create=True
-create=False
+# create=False
 tMax = 10
 tMax = None
 
@@ -26,15 +26,15 @@ fstFilename = 'Spar_F5T1N0S1/Main_Spar_ED.fst'; modelName='F5T1N0S1_fnd'; qop=[0
 
 # --- Tetra Spar
 # 
-fstFilename = 'MD0HD0SD0_F5T1N0S1/Main.fst'   ; modelName='F5T1N0S1_fnd'; qop=[0.25,-0.5162, 0, -0.1865*np.pi/180, 0.27*np.pi/180 ,-0.14,0]; qdop=[0,0,0,0,0,0,10/60*2*np.pi]; # NOTE: pitch init is very important. Yaw varies a lot in full sim, so won't be able to capture
-# fstFilename = 'MD0HD0SD0_F110111/Main.fst'   ; modelName='B110111'; qop=[0.34,-0.51, 0, -0.185*np.pi/180, 0.02*np.pi/180]
+fstFilename = 'TS_MD0HD0SD0_F5T1N0S1/Main.fst'   ; modelName='F5T1N0S1_fnd'; qop=[0.25,-0.5162, 0, -0.1865*np.pi/180, 0.27*np.pi/180 ,-0.14,0]; qdop=[0,0,0,0,0,0,10/60*2*np.pi]; # NOTE: pitch init is very important. Yaw varies a lot in full sim, so won't be able to capture
+# fstFilename = 'TS_MD0HD0SD0_F110111/Main.fst'   ; modelName='B110111'; qop=[0.34,-0.51, 0, -0.185*np.pi/180, 0.02*np.pi/180]
 
 # --- Tetra Spar simple models
-# fstFilename = 'MD0HD0SD0_F100010/Main.fst'   ; modelName='B100010'; #qop=[0,-0.155*np.pi/180]
-# fstFilename = 'MD0HD0SD0_F100010/Main.fst'   ; modelName='F100010T0RNA_fnd_noLoads'; qop=[0,-0.155*np.pi/180]
+# fstFilename = 'TS_MD0HD0SD0_F000010/Main.fst'   ; modelName='B000010';  qop=[-0.155*np.pi/180]; qdop=None # TODO Auto
+# fstFilename = 'TS_MD0HD0SD0_F000010/Main.fst'   ; modelName='F000010T0RNA_fnd_noLoads'; qop=[-0.155*np.pi/180]; qdop=None
+# fstFilename = 'TS_MD0HD0SD0_F100010/Main.fst'   ; modelName='B100010'; qop=[0,-0.155*np.pi/180]; qdop=None
+# fstFilename = 'TS_MD0HD0SD0_F100010/Main.fst'   ; modelName='F100010T0RNA_fnd_noLoads'; qop=[0,-0.155*np.pi/180]
 
-# fstFilename = 'MD0HD0SD0_F000010/Main.fst'   ; modelName='B000010';  qop=[-0.155*np.pi/180] # TODO Auto
-# fstFilename = 'MD0HD0SD0_F000010/Main.fst'   ; modelName='F000010T0RNA_fnd_noLoads'; qop=[-0.155*np.pi/180]
 
 
 figTitle='StructSim - ' + os.path.dirname(fstFilename)+' ' + modelName
@@ -53,10 +53,37 @@ if modelName[0]=='B':
 else:
     time, dfFS, p = sim.setupSim(tMax=tMax, J_at_Origin=True)
 
+# from welib.yams.flexibility import polyshape
+# TowerHt   = 85.185                                        
+# TowerBsHt = 16.000                                        
+# coeffs    = [  0.5912, 1.2292, -1.8609, 1.6627, -0.6222 ]
+# L = TowerHt-TowerBsHt
+# 
+# x = np.linspace(0,L,50)
+# 
+# U,V,K = polyshape(x, coeffs, exp=[2,3,4,5,6], x_max = L)
+# print('V',V)
+# print('nu_y',WT.twr.Bhat_t_bc)
+# 
+# x = np.linspace(0,1,50)
+# nu_y = (2.*x*coeffs[0] + 3.*x**2*coeffs[1] + 4.*x**3.*coeffs[2] + 5.*x**4.*coeffs[3] + 6.*x**5.*coeffs[4]) / L
+# print('nu_y',nu_y)
+# 
+# fig,ax = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
+# fig.subplots_adjust(left=0.12, right=0.95, top=0.95, bottom=0.11, hspace=0.20, wspace=0.20)
+# ax.plot(x, U, label='')
+# ax.plot(x, V, label='')
+# ax.set_xlabel('')
+# ax.set_ylabel('')
+# ax.legend()
+# plt.show()
+# 
+# import pdb; pdb.set_trace()
+
 sim.qop=qop
 sim.qdop=qdop
 sim.simulate(out=True, prefix='')
-fig = sim.plot(export=figExport, figSize=(12,10), title=figTitle)
+fig = sim.plot(export=figExport, figSize=(12,10), title=figTitle, nPlotCols=3)
 p=sim.p
 
 # --------------------------------------------------------------------------------}

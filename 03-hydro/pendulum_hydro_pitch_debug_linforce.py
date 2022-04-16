@@ -5,14 +5,14 @@ import os
 from numpy import cos, sin
 # Local 
 import weio
-import py.B000010_hydro as model
+import py.B000010_hydro0 as model
 from welib.yams.windturbine import FASTWindTurbine
 from welib.tools.clean_exceptions import *
 from welib.system.mech_system import MechSystem
 MyDir=os.path.dirname(__file__)
 
 # --- OpenFAST
-fstFilename = os.path.join(MyDir, '../models/SparNoRNA_F000010/Main.fst')
+fstFilename = os.path.join(MyDir, 'SparNoRNA_MD0HD1SD0_F000010/Main.fst')
 if os.path.exists(fstFilename.replace('.fst','.outb')): 
     dfFS = weio.read(fstFilename.replace('.fst','.outb')).toDataFrame()
     time =dfFS['Time_[s]'].values
@@ -100,8 +100,8 @@ Flin = FMlin + FKlin + Fxlin + Fzlin
 
 fig,ax = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
 fig.subplots_adjust(left=0.12, right=0.95, top=0.95, bottom=0.11, hspace=0.20, wspace=0.20)
-ax.plot(time, F   , label='Non linear')
-ax.plot(time, Flin, label='linear')
+ax.plot(time, F        , label='Non linear')
+ax.plot(time, Flin, '--', label='linear')
 ax.plot(time, Flin+Fz, 'k:',label='linear+Fz')
 # ax.plot(time, Fg   , label='Fg')
 # ax.plot(time, FKlin, label='FK', ls='--')
