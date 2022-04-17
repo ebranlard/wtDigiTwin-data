@@ -48,43 +48,43 @@ qdop = None
 
 # --- Spar No RNA
 # - Loads at 0
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True; # Perfect
-# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
-# modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; hydro=True
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True 
-# modelName = 'B000010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True 
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010_NoHydro/Main.fst'; hydro=True
-# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst'; hydro=True #NL/Lin: perfect except yaw for NL
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst';  # Perfect
+# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; 
+# modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; 
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst';  
+# modelName = 'B000010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst';  
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_F000010_NoHydro/Main.fst'; 
+# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst';  #NL/Lin: perfect except yaw for NL
 
 # - Loads at Origin
-# modelName = 'B000010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True  # NOT OK
-# modelName = 'B101010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True 
-# modelName = 'B111111_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst'; hydro=True #NL/Lin: perfect except yaw for NL (TODO BUT REFz HAS WRONG SIGN)
+# modelName = 'B000010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst';   # NOT OK
+# modelName = 'B101010_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst';  
+# modelName = 'B111111_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst';  #NL/Lin: perfect except yaw for NL (TODO BUT REFz HAS WRONG SIGN)
 
 
 # --- Spar
 # - Loads at 0
-# modelName = 'B001000_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F001000/Main.fst'; hydro=True # NL/Lin:Perfect
-# modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst'; hydro=True # NL/Lin:OK, acc a bit funky, yaw lin off
+# modelName = 'B001000_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F001000/Main.fst';  # NL/Lin:Perfect
+# modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst';  # NL/Lin:OK, acc a bit funky, yaw lin off
 # - Loads at Origin
-# modelName = 'B111111_hydroO'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst'; hydro=True # 
+# modelName = 'B111111_hydroO'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst';  # 
 
 
 # --- Tetra Spar
 # --- Loads at 0
-# modelName = 'B001000_hydro0'; fstFilename = 'TS_MD0HD1SD0_F001000/Main.fst'; hydro=True; # ~OK 
-# modelName = 'B001000_hydro0'; fstFilename =  'TS_MD0HD1SD0_F001000_NoCdCpCa/Main.fst'; hydro=True # ~OK
-# modelName = 'B000010_hydro0'; fstFilename =  'TS_MD0HD1SD0_F000010_NoCdCpCa/Main.fst'; hydro=True ; qop=[-2.266*np.pi/180] 
-# modelName = 'B000010_hydroO'; fstFilename =  'TS_MD0HD1SD0_F000010_NoCdCpCa/Main.fst'; hydro=True ; qop=[-2.2*np.pi/180] # NOTE: At O. OK
-# modelName = 'B100010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F100010/Main.fst'; hydro=True;  qop=[-1,-2.266*np.pi/180]  # TODO
-# modelName = 'B100010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F100010_NoRef/Main.fst'; hydro=True;  qop=[0,-0.48*np.pi/180]  # TODO 
-# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst'; hydro=True ; qop=[-2.5, 3.2, -2*np.pi/180]  # ~OK, need more mass (2kg)
-# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa/Main.fst'; hydro=True; # qop=[-2.0,0.08,2.9,0,-0.036,0.0018]; qdop=[0,0,0,0,0,0];
-# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa_Init/Main.fst'; hydro=True; # qop=[-2.0,0.08,2.9,0,-0.036,0.0018]; qdop=[0,0,0,0,0,0];
-modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111/Main.fst'; hydro=True;  qop=[-2.0,0.08,2.9,0,-2*np.pi/180,0.0*np.pi/180]; qdop=[0,0,0,0,0,0]; # ~OK, except yaw
+# modelName = 'B001000_hydro0'; fstFilename = 'TS_MD0HD1SD0_F001000/Main.fst';  # ~OK 
+# modelName = 'B001000_hydro0'; fstFilename =  'TS_MD0HD1SD0_F001000_NoCdCpCa/Main.fst';  # ~OK
+# modelName = 'B000010_hydro0'; fstFilename =  'TS_MD0HD1SD0_F000010_NoCdCpCa/Main.fst';  ; qop=[-2.266*np.pi/180] 
+# modelName = 'B000010_hydroO'; fstFilename =  'TS_MD0HD1SD0_F000010_NoCdCpCa/Main.fst';  ; qop=[-2.2*np.pi/180] # NOTE: At O. OK
+# modelName = 'B100010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F100010/Main.fst';   qop=[-1,-2.266*np.pi/180]  # TODO
+# modelName = 'B100010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F100010_NoRef/Main.fst';   qop=[0,-0.48*np.pi/180]  # TODO 
+# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst';  ; qop=[-2.5, 3.2, -2*np.pi/180]  # ~OK, need more mass (2kg)
+# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa/Main.fst';  # qop=[-2.0,0.08,2.9,0,-0.036,0.0018]; qdop=[0,0,0,0,0,0];
+# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa_Init/Main.fst';  # qop=[-2.0,0.08,2.9,0,-0.036,0.0018]; qdop=[0,0,0,0,0,0];
+modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111/Main.fst';   qop=[-2.0,0.08,2.9,0,-2*np.pi/180,0.0*np.pi/180]; qdop=[0,0,0,0,0,0]; # ~OK, except yaw
 # --- Loads at Origin
-# modelName = 'B101010_hydroO'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst'; hydro=True 
-# modelName = 'B111111_hydroO'; fstFilename = 'TS_MD0HD1SD0_F111111/Main.fst'; hydro=True; qop=[-2.0,0.08,2.9,0,-2*np.pi/180,0.0*np.pi/180]; qdop=[0,0,0,0,0,0]; # ~OK, except yaw
+# modelName = 'B101010_hydroO'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst';  
+# modelName = 'B111111_hydroO'; fstFilename = 'TS_MD0HD1SD0_F111111/Main.fst';  qop=[-2.0,0.08,2.9,0,-2*np.pi/180,0.0*np.pi/180]; qdop=[0,0,0,0,0,0]; # ~OK, except yaw
 
 
 # --- Generate python package

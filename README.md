@@ -26,6 +26,17 @@
    - Results are identical whether using "0" or "O"
 
 
+- HydroSim_Coupled:
+  - qop is quite important. I'm not sure what to make of uop...
+  - Simulations of TS show some instabilities. (some are also present in OpenFAST, e.g. for B101010)
+      Maybe due to lack of stiffness/damping -> Need Moorings
+
+  - Simulations extremely sensitive to qop pitch and heave
+
+  - TODO "FTNSB" simulations
+
+
+
 # Friday 15th of April
 
 - NOTE: Important GOTCHA: Cd, RefPointMotion, RefPointMapping, number of BldNodes, qop, uop,

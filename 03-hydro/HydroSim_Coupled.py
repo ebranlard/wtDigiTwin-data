@@ -5,7 +5,6 @@ NOTES:
     - TODO problem with ref
     - TODO deal with Drag
 
-
 """
 import os
 import numpy as np    
@@ -28,35 +27,42 @@ runSim=True
 
 tMax = 5
 tMax = 20
-# tMax = None
+tMax = None
 
 Method = 1
+qop=None
+qdop=None
 
 # --- Spar No RNA
-
-
-
-# modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; hydro=True
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoRef/Main.fst'; hydro=True 
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoRef_NoCdCpCa/Main.fst'; hydro=True 
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoCd/Main.fst'; hydro=True 
-# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst'; hydro=True 
-# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010_NoRef/Main.fst'; hydro=True
-# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; hydro=True
-# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoRef/Main.fst'; hydro=True
-# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoCd/Main.fst'; hydro=True
-# modelName = 'B111111_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoCd/Main.fst'; hydro=True
-# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst'; hydro=True
+# modelName = 'B001000_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F001000/Main.fst'; 
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoRef/Main.fst';  
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoRef_NoCdCpCa/Main.fst';  
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010_NoCd/Main.fst';  
+# modelName = 'B000010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F000010/Main.fst';  
+# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010_NoRef/Main.fst'; 
+# modelName = 'B101010_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F101010/Main.fst'; 
+# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoRef/Main.fst'; 
+# modelName = 'B111111_hydro0'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoCd/Main.fst'; 
+# modelName = 'B111111_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111_NoCd/Main.fst'; 
+# modelName = 'B111111_hydroO'; fstFilename = 'SparNoRNA_MD0HD1SD0_F111111/Main.fst'; 
 
 # --- Spar
-modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst'; hydro=True
-
+modelName = 'B001000_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F001000/Main.fst';  qop=[1.20] # OK
+# modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111_NoCd/Main.fst';  qop=[-1.5, 0.8, 1.23, 0,0,0.14*np.pi/180]
+# modelName = 'B111111_hydroO'; fstFilename = 'Spar_MD0HD1SD0_F111111_NoCd/Main.fst';  qop=[-1.6, 0.8, 1.20, 0,0.0*np.pi/180,0.14*np.pi/180]# NOTE: qop Pitch will introduce instability
+# modelName = 'B111111_hydro0'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst';       qop=[-1.6, 0.8, 1.23, 0,0,0.14*np.pi/180]
+# modelName = 'B111111_hydroO'; fstFilename = 'Spar_MD0HD1SD0_F111111/Main.fst';       qop=[-1.6, 0.8, 1.23, 0,0,0.14*np.pi/180]
 
 # --- Tetra Spar
-# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst'; hydro=True
-# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010_NoCdCpCa/Main.fst'; hydro=True
+# modelName = 'B000010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F000010_NoCdCpCa/Main.fst'; qop=[-2.266*np.pi/180];
+# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010/Main.fst'; 
+# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010_NoCdCpCa/Main.fst';  qop=[-2.5, 3.2, -1.68*np.pi/180]
+# modelName = 'B101010_hydro0'; fstFilename = 'TS_MD0HD1SD0_F101010_NoCd/Main.fst';  qop=[-2.5, 3.2, -1.68*np.pi/180]
+# modelName = 'B101010_hydroO'; fstFilename = 'TS_MD0HD1SD0_F101010_NoCd/Main.fst';  qop=[-2.5, 3.2, -1.68*np.pi/180]
+# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa/Main.fst'; 
+# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCd/Main.fst';   qop=[-2.8, 0.08, 3.2, 0, -2.0*np.pi/180, 0.000*np.pi/180]
+# modelName = 'B111111_hydroO'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCd/Main.fst';   qop=[-2.8, 0.08, 3.2, 0, -2.0*np.pi/180, 0.000*np.pi/180]
 
-# modelName = 'B111111_hydro0'; fstFilename = 'TS_MD0HD1SD0_F111111_NoCdCpCa/Main.fst'; hydro=True
 
 # --- Generate python package
 if create:
@@ -75,17 +81,24 @@ MCKh=None
 if runSim:
     # --- Setup Sim
     print('----------------------- SETUP SIMULATION -----------------------------------------')
-    WT = FASTWindTurbine(fstFilename, twrShapes=[0,2], nSpanTwr=50)  # TODO
+    WT = FASTWindTurbine(fstFilename, twrShapes=[0,2], algo='OpenFAST')
     sim = SimulatorFromOF(WT, modelName=modelName, packageDir='py')
     if modelName[0]=='B':
         time, dfFS, p = sim.setupSim(tMax=tMax, flavor='onebody', J_at_Origin=True)
     else:
         time, dfFS, p = sim.setupSim(tMax=tMax, J_at_Origin=True)
     zRef = -sim.p['z_B0']
+    su = sim.pkg.info()['su']
+    sq = sim.WT.DOFname
 
     # --- Linear Hydro
+    print('----------------------- LINEAR HYDRO  --------------------------------------------')
     q0=np.zeros(6)
-#     q0[4]=0.1*np.pi/180
+    if qop is not None:
+        q0_ = pd.DataFrame(data=q0, index=['x','y','z','phi_x','phi_y','phi_z'])
+        for i,s in enumerate(sq): 
+            q0_.loc[s] =qop[i]
+        q0 = q0_.values.flatten()
     hd = HydroDyn(fstFilename)
     if MCKh is 0:
         Mh=np.zeros((6,6))
@@ -104,9 +117,7 @@ if runSim:
     Mh = pd.DataFrame(data=Mh, columns=['x','y','z','phi_x','phi_y','phi_z'], index=['F_hx','F_hy','F_hz','M_hx','M_hy','M_hz'])
     Ch = pd.DataFrame(data=Ch, columns=['x','y','z','phi_x','phi_y','phi_z'], index=['F_hx','F_hy','F_hz','M_hx','M_hy','M_hz'])
     Kh = pd.DataFrame(data=Kh, columns=['x','y','z','phi_x','phi_y','phi_z'], index=['F_hx','F_hy','F_hz','M_hx','M_hy','M_hz'])
-    su = sim.pkg.info()['su']
-    sq = sim.WT.DOFname
-
+    Fh = pd.DataFrame(data=Fh0, index=['F_hx','F_hy','F_hz','M_hx','M_hy','M_hz'])
 #     Refz = - sim.p['z_B0']
 #     P_HDRef   = np.array((0,0,0))
 #     P_EDRef   = np.array((0,0,Refz))
@@ -131,14 +142,21 @@ if runSim:
 #     Kh2 = pd.DataFrame(data = Kh2, columns = Kh.columns, index=Kh.index)
 #     Ch2 = pd.DataFrame(data = Ch2, columns = Ch.columns, index=Ch.index)
 # 
-
+#     print('>>>>>>>>>> HACK DAMPING <<<<<')
+#     Ch.loc['F_hy','y']    =100000000
+#     Ch.loc['M_hz','phi_z']=100000000
+#     print('>>>>>>>>>> HACK STIFFNESS <<<<<')
+#     Kh.loc['F_hy','y']    +=1000000
+#     Kh.loc['M_hz','phi_z']+=1000000
 
     Mh_ = Mh.loc[su,sq]
     Ch_ = Ch.loc[su,sq]
     Kh_ = Kh.loc[su,sq]
+    Fh_ = Fh.loc[su]
     print('>>> Ch_\n',Ch_)
     print('>>> Mh_\n',Mh_)
     print('>>> Kh_\n',Kh_)
+    print('>>> Fh_\n',Fh_)
 # 
 #     Mh2_ = Mh2.loc[su,sq]
 #     Ch2_ = Ch2.loc[su,sq]
@@ -182,17 +200,28 @@ if runSim:
     #         fF = lambda t,x,xd: pkg.forcing(t, x, xd, p=p, u=u)
     #         sysNL = MechSystem(fM, F=fF, x0=q0, xdot0=qd0 )
 
+    # --- uop
+    print('----------------------- OPERATING POINT ------------------------------------------')
+    print('>>>> UOP')
+    uop = sim.uop
+#     for s in su:
+#         uop[s]=Fh_.loc[s].values[0]
+#     uop['F_hz'] = p['M_B']*p['g']
+    print(uop['F_hz'])
+    print(p['M_B']*p['g'])
+    print(uop)
+
     #uop=None
     #du=None
-    qop  = None # TODO TODO TODO TODO TODO
-    qdop = None
+    sim.qop  = qop
+    sim.qdop = qdop
     # Using mean as op
     # qop  = np.array([np.mean(dfFS[c]) for c in WT.q_channels])
     # qdop = np.array([np.mean(dfFS[c]) for c in WT.qd_channels])*0
     # --- Simulation
     #sim.setInputs(u, du, uop, qop, qdop)
-    sim.simulate(out=True, prefix='_hydroPyCoupled', MCKu=MCKu, NL=False)
-    sim.plot(export=True, prefix='_hydroPyCoupled', nPlotCols=3)
+    sim.simulate(out=True, prefix='_hydroPyCoupled_'+modelName, MCKu=MCKu, NL=False)
+    sim.plot(export=True,  prefix='_hydroPyCoupled_'+modelName, nPlotCols=3)
 
     # --- Plot forcing
     #fig,axes = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
